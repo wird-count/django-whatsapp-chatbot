@@ -6,3 +6,9 @@ class ConversationAdmin(admin.ModelAdmin):
     list_display = ("phone_number", "last_message_at", "created_at")
     search_fields = ("phone_number", "summary")
     readonly_fields = ("created_at", "last_message_at")
+
+from .models import Vehicule
+
+@admin.register(Vehicule)
+class VehiculeAdmin(admin.ModelAdmin):
+    list_display = ('marque', 'modele', 'annee', 'disponible', 'nouveaute')
