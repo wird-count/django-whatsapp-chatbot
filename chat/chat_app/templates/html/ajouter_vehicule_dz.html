@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter un véhicule | DZ Rent Car</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-100 text-gray-900">
+  <header class="bg-[#26262b] text-white">
+    <div class="mx-auto flex max-w-4xl items-center justify-between px-5 py-5">
+      <a href="/" class="text-xl font-extrabold">DZ <span class="text-[#f05514]">Rent Car</span></a>
+      <span class="text-sm text-gray-300">Gestion des véhicules</span>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-10">
+    <section class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+      <a href="/" class="mb-5 inline-block text-sm font-semibold text-gray-600 hover:text-[#f05514]">← Retour au site</a>
+      <h1 class="text-2xl font-extrabold sm:text-3xl">Ajouter un véhicule</h1>
+      <p class="mt-2 text-sm text-gray-500">Renseignez les informations du véhicule puis enregistrez-le.</p>
+
+      {% if messages %}
+        <div class="mt-5 space-y-2">
+          {% for message in messages %}
+            <div class="rounded-xl border p-3 text-sm
+              {% if message.tags == 'error' %}border-red-200 bg-red-50 text-red-700
+              {% else %}border-green-200 bg-green-50 text-green-700{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+<form method="post" action="" enctype="multipart/form-data" class="mt-7 space-y-5">
+        {% csrf_token %}
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="marque" class="mb-2 block text-sm font-semibold">Marque *</label>
+            <input id="marque" name="marque" type="text" maxlength="50" required
+                   value="{{ request.POST.marque|default:'' }}"
+                   placeholder="Ex. Renault"
+                   class="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-[#f05514] focus:ring-2 focus:ring-orange-100">
+          </div>
+
+          <div>
+            <label for="modele" class="mb-2 block text-sm font-semibold">Modèle *</label>
+            <input id="modele" name="modele" type="text" maxlength="50" required
+                   value="{{ request.POST.modele|default:'' }}"
+                   placeholder="Ex. Clio 5"
+                   class="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-[#f05514] focus:ring-2 focus:ring-orange-100">
+          </div>
+
+          <div>
+            <label for="annee" class="mb-2 block text-sm font-semibold">Année</label>
+            <input id="annee" name="annee" type="number" min="1900" max="2100"
+                   value="{{ request.POST.annee|default:'' }}"
+                   placeholder="Ex. 2024"
+                   class="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-[#f05514] focus:ring-2 focus:ring-orange-100">
+          </div>
+
+          <div>
+            <label for="prix" class="mb-2 block text-sm font-semibold">Prix (DA)</label>
+            <input id="prix" name="prix" type="number" min="0" step="0.01"
+                   value="{{ request.POST.prix|default:'' }}"
+                   placeholder="Ex. 4500"
+                   class="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-[#f05514] focus:ring-2 focus:ring-orange-100">
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-orange-200 bg-orange-50 p-4">
+            <input type="checkbox" name="location" value="on"
+                   {% if request.POST.location %}checked{% endif %}
+                   class="mt-1 h-4 w-4 accent-orange-600">
+            <span>
+              <span class="block text-sm font-bold">Activer la location pour ce véhicule</span>
+              <span class="mt-1 block text-sm text-gray-600">Cochez cette case si ce véhicule doit être proposé à la location.</span>
+            </span>
+          </label>
+
+          <label class="flex cursor-pointer items-start gap-3 rounded-xl bg-gray-50 p-4">
+            <input type="checkbox" name="disponible" value="on"
+                   {% if request.method != 'POST' or request.POST.disponible %}checked{% endif %}
+                   class="mt-1 h-4 w-4 accent-orange-600">
+            <span>
+              <span class="block text-sm font-semibold">Véhicule disponible</span>
+              <span class="mt-1 block text-sm text-gray-600">Décochez si le véhicule n'est pas disponible actuellement.</span>
+            </span>
+          </label>
+
+          <label class="flex cursor-pointer items-start gap-3 rounded-xl bg-gray-50 p-4">
+            <input type="checkbox" name="nouveaute" value="on"
+                   {% if request.POST.nouveaute %}checked{% endif %}
+                   class="mt-1 h-4 w-4 accent-orange-600">
+            <span>
+              <span class="block text-sm font-semibold">Marquer comme nouveauté</span>
+              <span class="mt-1 block text-sm text-gray-600">Activez cette option pour signaler l'arrivée récente du véhicule.</span>
+            </span>
+          </label>
+        </div>
+        <!-- Photo du véhicule -->
+        <div>
+          <label for="photo" class="mb-2 block text-sm font-semibold">
+            Photo du véhicule
+          </label>
+
+          <input
+            id="photo"
+            name="photo"
+            type="file"
+            accept="image/*"
+            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm
+                  file:mr-4 file:rounded-lg file:border-0
+                  file:bg-orange-100 file:px-4 file:py-2
+                  file:font-semibold file:text-orange-700
+                  hover:file:bg-orange-200"
+          >
+
+          <p class="mt-2 text-xs text-gray-500">
+            Formats acceptés : JPG, JPEG, PNG ou WebP.
+          </p>
+        </div>
+
+        <button type="submit"
+                class="w-full rounded-full bg-[#f05514] px-6 py-3.5 font-bold text-white transition hover:bg-[#c74610]">
+          Enregistrer le véhicule
+        </button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
