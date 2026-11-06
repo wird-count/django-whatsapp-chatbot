@@ -1,0 +1,1 @@
+[32m2026-10-18 22:44:52.328[0m | [31m[1mERROR   [0m | [36mfree_claude_code.cli.commands[0m:[36m_log_port_in_use[0m:[36m97[0m - [31m[1mFCC is already running on port 8082. Use it at http://127.0.0.1:8082/admin, or stop it before starting another instance.[0m

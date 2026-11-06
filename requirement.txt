@@ -1,0 +1,6 @@
+Python 3.14.6
+django 6.1.2
+python libraries (bib) :
+    pyyaml
+    request
+    django-cors-headers

@@ -1,0 +1,80 @@
+{% load static %}<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ajouter un véhicule</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <main class="page">
+    <h1>Ajouter un véhicule</h1>
+    <p class="intro">Le véhicule est enregistré dans le stock. Vous choisissez ensuite si les clients sont prévenus par WhatsApp.</p>
+
+    {% if messages %}
+    <ul class="messages" role="status">
+      {% for message in messages %}
+      <li class="msg msg-{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form id="vehicule-form" method="post" action="{% url 'trigger_avis_a_nos_client' %}" novalidate>
+      {% csrf_token %}
+
+      <div class="field">
+        <label for="marque">Marque</label>
+        <input id="marque" name="marque" type="text" maxlength="50" required
+               autocomplete="off" aria-describedby="err-marque"
+               value="{{ request.POST.marque|default:'' }}">
+        <p class="error" id="err-marque" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="modele">Modèle</label>
+        <input id="modele" name="modele" type="text" maxlength="50" required
+               autocomplete="off" aria-describedby="err-modele"
+               value="{{ request.POST.modele|default:'' }}">
+        <p class="error" id="err-modele" role="alert"></p>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="annee">Année</label>
+          <input id="annee" name="annee" type="number" inputmode="numeric" min="1980"
+                 aria-describedby="err-annee"
+                 value="{{ request.POST.annee|default:'' }}">
+          <p class="error" id="err-annee" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="prix">Prix (DA)</label>
+          <input id="prix" name="prix" type="number" inputmode="decimal" min="0" step="0.01"
+                 aria-describedby="err-prix"
+                 value="{{ request.POST.prix|default:'' }}">
+          <p class="error" id="err-prix" role="alert"></p>
+        </div>
+      </div>
+
+      <label class="check" for="nouveaute">
+        <input id="nouveaute" name="nouveaute" type="checkbox"
+               {% if request.method != 'POST' or request.POST.nouveaute %}checked{% endif %}>
+        <span>Ce véhicule est une nouveauté</span>
+      </label>
+
+      <label class="check notify" for="prevenir_clients">
+        <input id="prevenir_clients" name="prevenir_clients" type="checkbox"
+               {% if request.POST.prevenir_clients %}checked{% endif %}>
+        <span>
+          <strong>Prévenir les clients</strong>
+          Un message WhatsApp sera envoyé à tous les clients dès l'enregistrement.
+        </span>
+      </label>
+
+      <button type="submit" id="submit-btn" data-label="Enregistrer le véhicule">Enregistrer le véhicule</button>
+    </form>
+  </main>
+
+  <script src="{% static 'js/app.js' %}" defer></script>
+</body>
+</html>
