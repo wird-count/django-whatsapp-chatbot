@@ -32,6 +32,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'api',
     'chat_app',
     'chat_app2',
     'django.contrib.admin',

@@ -14,7 +14,10 @@ def authentication(request):
         )
         if user is not None :
             login(request,user)
+            print(request.json())
             return redirect('ia_management')
+
+        
         else : 
             messages.error(request,'veuillez resesir vos cordonnee , merci !')
             return(request,'html/authentication.html')
@@ -41,10 +44,15 @@ def ia_management(request):
                 
 
 def dz_rent_car(request):
+    
+ 
     from .models import Vehicule
+    from django.http import JsonResponse
+
     vh = Vehicule.objects.filter(location=True).order_by('-created_at')
+    # return JsonResponse({'vehicules':list(vh.values('id','marque','modele','annee','prix'))})
     if vh == None :
-        return render(request,'html/dz_rent_car.html')
+        return render(request,'html/dz_rent_car.html',{'key-yacine':'value-w10'})
     return render(request,'html/dz_rent_car.html',{'vehicules':vh})
 
 

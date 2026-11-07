@@ -1,0 +1,9 @@
+$kind: http-request
+name: ""
+url: https://httpbin.org/get
+method: GET
+auth:
+  type: digest
+  credentials:
+    algorithm: MD5
+order: 1000
