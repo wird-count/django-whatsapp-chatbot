@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path,include
 from chat_app import views , urls_chat
 from api import urls_api
+from chat_app2 import urls as urlsss
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(urls_chat)),
-    path('api',include(urls_api)),
+    path('api/',include(urls_api)),
+    path('chat_app2/',include(urlsss)),
 ]
