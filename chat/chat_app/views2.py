@@ -130,3 +130,4 @@ def reduire_image(fichier , max_px=1200, qualite=82):
     sortie = BytesIO()
     img.save(sortie, 'JPEG', quality=qualite, optimize=True)
     return ContentFile(sortie.getvalue(), name=f'photo{vehicul_index}.jpg')
+

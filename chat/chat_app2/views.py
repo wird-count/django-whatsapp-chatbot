@@ -1,21 +1,24 @@
 from django.shortcuts import render
-
+from django.http import JsonResponse
+JsonResponse()
 # Create your views here.
 import requests
 from requests import auth
-endpoint  = 'http://localhost:8000/api?abc=123'
+endpoint  = 'http://localhost:8001/api?abc=123'
 import json
 i = 0
 def lancee_une_requette(request):
     global i
     if i>0 :
-        print(f'111 - {request.GET.get('key')}')
-        print(f'222 - {request.GET.get('abc')}')
+        print(f'111 - {request.json()('key')}')
+        print(f'222 - {request.json()('abc')}')
     i+=1
+    
     import requests
- 
+    
     endpoint = 'http://localhost:8000/api/?abc=123'
-    return requests.get(endpoint)
+    return requests.post(url=endpoint,json={'yacine':'hocini',
+                                           'foudil':'hocini'})
 
     session = requests.Session()
 

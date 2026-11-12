@@ -14,8 +14,10 @@ def func(request):
     # data = json.dumps(data, ensure_ascii=False)
     data['abc']=request.GET.get('abc')# car on a passe abc comme parametre
     # return JsonResponse(data,safe=False)
-    endpoint_chatapp2 = 'http://localhost:8000/chat_app2/?abc=123'
-    return requests.get(endpoint_chatapp2,params={'key':'value / im the parameter sent withing the request from api ---> chatapp2'})
+
+    endpoint_chatapp2 = 'http://localhost:8001/chat_app2/?abc=123'
+    return requests.get(url = endpoint_chatapp2,params={'key':'value / im the parameter sent withing the request from api ---> chatapp2'})
+
 
 
 
@@ -31,5 +33,21 @@ def get_csrf(request):
     return JsonResponse({
         'message': 'CSRF cookie created'
     })
+
+
+
+
+def modify_in_chatapp_restapi(request):
+    endpoint = 'http://localhost:8001/chat_app/'
+    car_id = input('veullez inserer le id du vehicule dont vous en voulez completer des modification !')
+    url = endpoint + '{car_id}/'
+    # marque = request.POST.get('marque')
+    # anne = request.POST.get('anne')
+    data = {'annee':2026,
+            'marque' : 'GAC',
+            }
+    return(requests.put(url = endpoint,data = data))
+
+
 
 
