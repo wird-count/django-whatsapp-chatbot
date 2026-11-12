@@ -102,18 +102,19 @@ def rest_fm_modification(request,id=None) :# on linistiase vers null pour en cas
     # return(post(request,id) or get(request,id) or put(request,id) or patch(request,id) or delete(request,id))
 
 
-    from rest_framework import api_view ,response
-    from django.http import HttpResponse
-    @api_view(['PATCH'])
-    def patch(request,id):
-        data = request.data
-        vh = Vehicule.objects.get(id=id)
-        vs = vehiculeSerializer(
-            instance = vh,
-            data = data,
-            partial  = True,
-        )
-        vs.is_valid(raise_exception=True)
-        vs.save()
-        return HttpResponse(data,
-                            content_type = 'application/json')
+    # from rest_framework import api_view ,response
+    # from django.http import HttpResponse
+    # @api_view(['PATCH'])
+    # def patch(request,id):
+    #     data = request.data
+    #     vh = Vehicule.objects.get(id=id)
+    #     vs = vehiculeSerializer(
+    #         instance = vh,
+    #         data = data,
+    #         partial  = True,
+    #     )
+    #     vs.is_valid(raise_exception=True)
+    #     vs.save()
+    #     return HttpResponse(data,
+    #                         content_type = 'application/json')
+    

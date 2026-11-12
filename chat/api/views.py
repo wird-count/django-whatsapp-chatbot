@@ -51,3 +51,8 @@ def modify_in_chatapp_restapi(request):
 
 
 
+def let_manipulate_our_api_from_here(request):
+    url_post = 'http://localhost:8000/rest_fm_modification'
+    import requests
+    rq = requests
+
