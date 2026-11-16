@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'chat-app' / 'templates' / 'static']
+STATICFILES_DIRS = ['C:/test-claude/chatbot-whatssapp/chat/chat/chat-app/static']
 
 
 # Email
@@ -138,8 +138,8 @@ MAILERS = {
 ALLOWED_HOSTS = ["127.0.0.1",'localhost',".ngrok-free.dev"]
 
 #-- for the token loading to the webhook function (views) --
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 

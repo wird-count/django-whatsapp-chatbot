@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path('csrf/', views.get_csrf, name='get_csrf'),
-    path('', views.func, name='api'),
+    path('let_manipulate_our_api_from_here', views.let_manipulate_our_api_from_here, name='api'),
 ]
+
+

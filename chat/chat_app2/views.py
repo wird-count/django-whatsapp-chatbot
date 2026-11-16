@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-JsonResponse()
+
 # Create your views here.
 import requests
 from requests import auth

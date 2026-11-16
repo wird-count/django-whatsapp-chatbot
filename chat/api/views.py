@@ -51,8 +51,30 @@ def modify_in_chatapp_restapi(request):
 
 
 
+data1 = {
+    'marque':'BMW',
+    'modele':'M5_COMP'
+}
 def let_manipulate_our_api_from_here(request):
     url_post = 'http://localhost:8000/rest_fm_modification'
     import requests
-    rq = requests
+    global data1
+    
+    data = {
+        'marque' : 'renault',
+        'modele' : 'symbol',
+        'annee': 2025,
+        'disponible' : True , #cest la ou le json.dumps doit intervenir
+    }
+    data = json.dumps(data)
+    rq = requests.post(url = url_post,data=data)
+    print(rq)
+    rq = requests.get(url=(url_post+'/3'))
+    print(rq)
+    rq = requests.put(url=(url_post+'/3'),data = data1)
+    print(rq)
+    rq = requests.patch(url = (url_post+'/3'),data = data)
+    print(rq)
+    rq = request.delete(url = url_post + '/3',data = data)
+    print(rq)
 

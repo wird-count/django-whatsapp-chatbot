@@ -4,8 +4,7 @@ from . import views,views2
 from django.conf import settings
 from django.conf.urls.static import static
 from . import urls_rest_api
-import views3
-
+from . import views3
 urlpatterns = [
     path('webhook/',views.webhook,name='webhook'),#sauf meta qui lui fait appel a traveers le webhookconfiguration 
     path('auto/',views.trigger_avis_a_nos_client , name = 'trigger_avis_a_nos_client'),
